@@ -10,6 +10,6 @@ Classe Main: classe principale contente i metodi statici utili al programma
 
 TODO:
 
-G: ampliamento assortimento verbi
-G-F: creare una buona UI (GUI?) 
+Contollo su exception
+G: ampliamento assortimento verbi 
 inglesizzare il tutto
