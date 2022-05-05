@@ -1,10 +1,11 @@
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
  * Project to classificate conditional phrases
- * 
+ *
  * @author Gabriele Triglia, Federico Biasioli
  * @version 1.2
  */
@@ -69,12 +70,10 @@ public class Main {
 
 	/**
 	 * Metodo principale del programma
-	 * 
+	 *
 	 * @param args arguments
 	 */
 	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		Scanner input = new Scanner(System.in);
 		System.out.println("\t\tConditional phrases control program");
 		/*
 		 * frasi usate:
@@ -88,12 +87,14 @@ public class Main {
 		String userInput = "";
 		String frase = "";
 		int i = 0;
+		Scanner sc1 = new Scanner(System.in);
 		creaCondizionali();
 		vektorerstellung();
 		do {
+			i=0;
 			leviClear();
 			System.out.print("Inserire la frase condizionale: ");
-			frase = sc.nextLine().trim();
+			frase = sc1.nextLine().trim();
 			cookieSplit(frase);
 			scomponiPeriodo();
 			Rumbling();
@@ -106,20 +107,19 @@ public class Main {
 				}
 				System.out.print("Eseguire nuovamente? [y/n]: ");
 				try {
-					userInput = input.nextLine().toLowerCase();					
+					userInput = sc1.nextLine().toLowerCase();
 				} catch (Exception e) {
-					System.out.println("ciao");
+					System.out.println(e);
 				}
 				i++;
-			} while (userInput.charAt(0)!='y'&&userInput.charAt(0)!='n');
-		} while (userInput.charAt(0)=='y');
-		sc.close();
-		input.close();
+			} while (userInput.charAt(0) != 'y' && userInput.charAt(0) != 'n');
+		} while (userInput.charAt(0) == 'y');
+		sc1.close();
 	}
 
 	/**
 	 * metodo statico per dividere la frase condizonale
-	 * 
+	 *
 	 * @param frase la frase da dividere
 	 */
 	private static void cookieSplit(String frase) {
@@ -147,6 +147,10 @@ public class Main {
 				if (indice2 == lineaFile.length()) {
 					indice2 = -1;
 				}
+			}
+			if(indice2 == lineaFile.length()-1)
+			{
+				indice2=0;
 			}
 			System.out.println("Indice di segno di divisione: " + indice2);
 
@@ -216,7 +220,7 @@ public class Main {
 			if (verbiPrimoPeriodo.size() == 3) {
 				// would have + past participle form
 				if (verbiPrimoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2) && tempoVerbalePP == 0) {
+					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2|| codiceTempoVerbalePP.get(2)==1) && tempoVerbalePP == 0) {
 						tempoVerbalePP = 11;
 					}
 				}
@@ -315,7 +319,7 @@ public class Main {
 			// could + have + past participle
 			if (verbiPrimoPeriodo.get(0).equals("could")) {
 				if (verbiPrimoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2) && tempoVerbalePP == 0) {
+					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2|| codiceTempoVerbalePP.get(2)==1) && tempoVerbalePP == 0) {
 						tempoVerbalePP = 18;
 					}
 				}
@@ -323,7 +327,7 @@ public class Main {
 			// might + have + past participle
 			if (verbiPrimoPeriodo.get(0).equals("might")) {
 				if (verbiPrimoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2) && tempoVerbalePP == 0) {
+					if ((codiceTempoVerbalePP.get(2) == 3 || codiceTempoVerbalePP.get(2) == 2 || codiceTempoVerbalePP.get(2)==1) && tempoVerbalePP == 0) {
 						tempoVerbalePP = 19;
 					}
 				}
@@ -357,7 +361,7 @@ public class Main {
 			if (verbiSecondoPeriodo.size() == 3) {
 				// would have + past participle form
 				if (verbiSecondoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2) && tempoVerbaleSP == 0) {
+					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2|| codiceTempoVerbalePP.get(2)==1) && tempoVerbaleSP == 0) {
 						tempoVerbaleSP = 11;
 					}
 				}
@@ -456,7 +460,7 @@ public class Main {
 			// could + have + past participle
 			if (verbiSecondoPeriodo.get(0).equals("could")) {
 				if (verbiSecondoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2) && tempoVerbaleSP == 0) {
+					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2|| codiceTempoVerbalePP.get(2)==1) && tempoVerbaleSP == 0) {
 						tempoVerbaleSP = 18;
 					}
 				}
@@ -464,7 +468,7 @@ public class Main {
 			// might + have + past participle
 			if (verbiSecondoPeriodo.get(0).equals("might")) {
 				if (verbiSecondoPeriodo.get(1).equals("have")) {
-					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2) && tempoVerbaleSP == 0) {
+					if ((codiceTempoVerbaleSP.get(2) == 3 || codiceTempoVerbaleSP.get(2) == 2|| codiceTempoVerbalePP.get(2)==1) && tempoVerbaleSP == 0) {
 						tempoVerbaleSP = 19;
 					}
 				}
@@ -708,7 +712,7 @@ public class Main {
 
 	/**
 	 * Metodo statico per trovare il il token (parola da cercare)
-	 * 
+	 *
 	 * @param frase           la frase dove eseguire la ricerca
 	 * @param parolaDaCercare la parola da cercare nella frase
 	 * @return pozisione della parola
@@ -765,7 +769,7 @@ public class Main {
 									|| (isIf == 1 && tempoVerbalePP == 14)
 									|| (isIf == 1 && tempoVerbalePP == 15) || (isIf == 1 && tempoVerbalePP == 16)
 									|| (isIf == 1 && tempoVerbalePP == 17)))) {
-				System.out.println("Il tipo di condizionale e': 1");
+				System.out.println("Il tipo di condizionale e': First conditional");
 				conferma++;
 			}
 			// tipo due
@@ -775,7 +779,7 @@ public class Main {
 							|| (isIf == 1 && tempoVerbalePP == 15))
 							|| ((isIf == 0 && tempoVerbaleSP == 10) || (isIf == 0 && tempoVerbaleSP == 13)
 									|| (isIf == 0 && tempoVerbaleSP == 15)))) {
-				System.out.println("Il tipo di condizionale e': 2");
+				System.out.println("Il tipo di condizionale e': Second conditional");
 				conferma++;
 			}
 			// tipo tre
@@ -785,13 +789,13 @@ public class Main {
 							|| (isIf == 1 && tempoVerbalePP == 19))
 							|| ((isIf == 0 && tempoVerbaleSP == 11) || (isIf == 0 && tempoVerbaleSP == 18)
 									|| (isIf == 0 && tempoVerbaleSP == 19)))) {
-				System.out.println("Il tipo di condizionale e': 3");
+				System.out.println("Il tipo di condizionale e': Third conditional");
 				conferma++;
 			}
 			// tipo zero
 			if ((((tempoVerbalePP == 1) || (tempoVerbalePP == 3) || (tempoVerbalePP == 4)))
 					&& (((tempoVerbaleSP == 1) || (tempoVerbaleSP == 3) || (tempoVerbaleSP == 4)))) {
-				System.out.println("Il tipo di condizionale e': 0");
+				System.out.println("Il tipo di condizionale e': Zero conditional");
 				conferma++;
 			}
 			// 1 mixed
@@ -820,9 +824,18 @@ public class Main {
 	}
 
 	/**
-	 * Metodo statico per permettere all'utente di modificare o meno i verbi
-	 * riconosciuti dal programma
+	 * Metodo statico per convertire String in int
+	 *
+	 * @param s stringa di input
+	 * @return la stringa convertita in int oppure -1 in caso di eccezione
 	 */
+	private static int atoi(String s) {
+		try {
+			return Integer.valueOf(s);
+		} catch (NumberFormatException e) {
+			return -1;
+		}
+	}
 	private static void verbCheck() {
 		String scelta;
 		int inputRem = 0;
@@ -880,33 +893,26 @@ public class Main {
 				System.out.println("Dati errati riprovare");
 			}
 		} while (scelta.charAt(0) != 'n' && scelta.charAt(0) != 'y');
-		// sc1.close();
-		// sc2.close();
 	}
-
-	/**
-	 * Metodo statico per convertire String in int
-	 * 
-	 * @param s stringa di input
-	 * @return la stringa convertita in int oppure -1 in caso di eccezione
-	 */
-	private static int atoi(String s) {
-		try {
-			return Integer.valueOf(s);
-		} catch (NumberFormatException e) {
-			return -1;
-		}
-	}
-
 	/** Metodo statico per rimuovere elementi da Liste e Array */
-	private static void leviClear(){
-		codiceTempoVerbalePP.clear();	
-		codiceTempoVerbaleSP.clear();	
+	private static void leviClear() {
+		codiceTempoVerbalePP.clear();
+		codiceTempoVerbaleSP.clear();
+		primoPeriodo = "";
+		secondoPeriodo = "";
 		verbiPrimoPeriodo.clear();
 		verbiSecondoPeriodo.clear();
-		for(int i=0;i<100;i++){
-			parolePrimoPeriodo[i]=null;
-			paroleSecondoPeriodo[i]=null;
+		tempoVerbalePP=0;
+		tempoVerbaleSP=0;
+		int i = 0;
+		while (i<parolePrimoPeriodo.length) {
+			parolePrimoPeriodo[i] = null;
+			i++;
+		}
+		i = 0;
+		while (i<paroleSecondoPeriodo.length) {
+			paroleSecondoPeriodo[i] = null;
+			i++;
 		}
 	}
 }
